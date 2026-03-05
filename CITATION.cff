@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this project in your research, please cite it as below."
+type: software
+title: "BDComNet: Bangladesh Disaster Communication Network"
+abstract: >
+  A solar-powered, community-operated, decentralized two-layer mesh network
+  architecture for disaster-resilient communication in Bangladesh. Combines
+  LoRa ground mesh (10–15km range, text + GPS) with WiFi tower backbone
+  (HD voice + messaging) — operates without internet, electricity, or any
+  centralized infrastructure.
+authors:
+  - family-names: Hosen
+    given-names: Md Millat
+    orcid: "https://orcid.org/0009-0005-7198-9893"
+    affiliation: "Department of Computer Science & Engineering, Sharda University"
+    email: codermillat@gmail.com
+repository-code: "https://github.com/codermillat/bdcomnet"
+license: MIT
+version: 1.0.0
+date-released: 2026-03-05
+keywords:
+  - LoRa
+  - mesh network
+  - disaster communication
+  - Bangladesh
+  - community network
+  - off-grid
+  - Meshtastic
+  - resilient infrastructure
+  - solar powered
