@@ -1,0 +1,66 @@
+# BDComNet — Recommended Meshtastic Configuration
+# For TTGO T-Beam v1.1 nodes
+# Region: South Asia (Bangladesh)
+# Last updated: March 2026
+
+lora:
+  region: IN_865                # South Asia frequency band
+  modem_preset: LONG_FAST       # 1kbps, 10–20km range on flat BD terrain
+  spreading_factor: 11          # Balance of range and speed
+  bandwidth: 250                # kHz — doubles data rate vs 125kHz
+  coding_rate: 8                # 4/8 — maximum error correction
+  tx_power: 20                  # dBm (100mW) — legal ISM maximum
+  hop_limit: 3                  # Default mesh hop limit
+
+device:
+  # Set device_role based on placement:
+  # ROUTER     → Fixed rooftop node (relays all traffic, stays on)
+  # CLIENT     → Carried by person (connects to mesh, lower power)
+  # REPEATER   → Dedicated relay (no display, lowest power)
+  device_role: ROUTER           # Change to CLIENT for personal carried nodes
+
+position:
+  gps_mode: ENABLED
+  gps_update_interval: 30       # seconds between GPS broadcasts
+  position_broadcast_secs: 30   # seconds between position packets
+  # position_precision options:
+  # 32 = full precision (~3m accuracy) — use for personal/rescue
+  # 14 = ~1km accuracy — balanced privacy
+  # 10 = ~10km accuracy — high privacy
+  position_precision: 32
+
+power:
+  # For solar-powered nodes, disable sleep to maintain mesh relay
+  is_power_saving: false        # Set true for battery-only personal nodes
+
+bluetooth:
+  enabled: true
+  mode: RANDOM_PIN              # Random PIN for each pairing
+
+# Channel configuration
+# Generate a new PSK and share via QR code with your group
+# Do NOT use the default channel — it is public
+channels:
+  - name: BDComNet
+    psk: generate_random        # Replace with your generated key
+    role: PRIMARY
+    uplink_enabled: false
+    downlink_enabled: false
+
+# --- NOTES FOR BANGLADESH DEPLOYMENT ---
+# 
+# Why IN_865?
+#   The IN_865 region (865–867 MHz) is the appropriate South Asia band.
+#   This is within the ISM license-free allocation for personal use in Bangladesh.
+#   Do NOT use US_915 — partially restricted in Bangladesh.
+#   Do NOT use EU_868 — not appropriate for Bangladesh.
+#
+# Why LONG_FAST?
+#   Bangladesh is mostly flat delta terrain — ideal for LoRa.
+#   LONG_FAST (SF11, BW250) gives ~1kbps at 10–20km range.
+#   Sufficient for text messages (160 chars in ~0.2 seconds).
+#   For longer range at cost of speed, use LONG_SLOW (SF12, BW125).
+#
+# Placement matters most:
+#   A node on a 3-story rooftop reaches 3–5× farther than ground level.
+#   For 15km range in flat BD terrain, aim for 10m+ elevation.
